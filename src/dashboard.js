@@ -12,7 +12,7 @@ class Dashboard extends Component {
         console.log(token);
         this.state = {
             token, dropdownOpen: false, classes: []
-        }
+        };
         this.getClasses = this.getClasses.bind(this);
         this.toggle = this.toggle.bind(this);
 
@@ -60,8 +60,8 @@ class Dashboard extends Component {
                                     </DropdownToggle>
                                     <DropdownMenu>
                                         <DropdownItem header>Seleccione un materia</DropdownItem>
-                                        {this.state.classes.map((item) =>{
-                                            return <DropdownItem>{item.name}</DropdownItem>
+                                        {this.state.classes.map((item) => {
+                                            return <DropdownItem key={item._KEY}>{item.name}</DropdownItem>
                                         })}
                                     </DropdownMenu>
                                 </Dropdown>
