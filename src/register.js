@@ -1,10 +1,13 @@
 import React, {Component} from 'react'
 import Axios from 'axios'
 import {Button, Card, CardBlock, CardText, CardTitle, Form, FormGroup, Input, Label} from 'reactstrap';
+import QueryBuilder from 'sbx-querybuilder'
+import {Redirect} from 'react-router-dom';
 
 export default class Register extends Component {
     constructor(props) {
         super(props);
+        this.state = {register: false};
         this.handleInputChange = this.handleInputChange.bind(this);
         this.registerOnSbx = this.registerOnSbx.bind(this);
     }
@@ -30,10 +33,38 @@ export default class Register extends Component {
                 }
             }).then(res => {
             console.log(res);
-        })
+            const user = res.data.user;
+            const query = new QueryBuilder()
+                .setDomain(197)
+                .setModel('user')
+                .addObject({
+                    nombre: user.name,
+                    id: user.id,
+                    username: user.login
+                })
+                .compile();
+            debugger
+            Axios({
+                method: 'post',
+                url: 'https://archivo.digital/api/data/v1/row',
+                data: query,
+                headers: {
+                    'Authorization': 'Bearer ' + res.data.token,
+                    'App-Key': "d955b7df-2f91-467c-ad07-ebc5abb57646"
+                }
+            }).then(res => {
+                if(res.data.success)
+                {
+                    this.setState({register:true})
+                }
+            })
+        });
     }
 
     render() {
+        if (this.state.register) {
+            return <Redirect to='/dashboard'/>;
+        }
         return (
             <div className="container bg">
                 <div className="row bg align-items-center justify-content-center">
@@ -65,12 +96,15 @@ export default class Register extends Component {
                                                 </FormGroup>
                                                 <FormGroup>
                                                     <Label for="examplePassword">Password</Label>
-                                                    <Input onChange={this.handleInputChange} type="password" name="password"
+                                                    <Input onChange={this.handleInputChange} type="password"
+                                                           name="password"
                                                            id="password"
                                                            placeholder="Inserte su password"/>
                                                 </FormGroup>
                                                 <FormGroup className="text-center">
-                                                    <Button onClick={()=>{this.registerOnSbx()}}>Registrarse</Button>
+                                                    <Button onClick={() => {
+                                                        this.registerOnSbx()
+                                                    }}>Registrarse</Button>
                                                 </FormGroup>
                                             </Form>
                                         </CardText>

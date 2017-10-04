@@ -4,6 +4,7 @@ import Dashboard from './dashboard'
 import Register from './register';
 import { BrowserRouter, Route, Link,  } from 'react-router-dom'
 import Login from './login';
+import classDetail from './classDetail';
 
 class App extends Component {
   render() {
@@ -12,6 +13,7 @@ class App extends Component {
           <Route exact path='/' component={Login}/>
           <Route exact path='/dashboard' component={Dashboard}/>
           <Route exact path='/register' component={Register}/>
+            <Route exact path='/class/:key' component={classDetail}/>
         </div>
     );
   }

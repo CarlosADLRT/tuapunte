@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import ImageUpload from './imageUpload';
 import Axios from 'axios';
 import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from 'reactstrap';
+import {Link, Redirect} from 'react-router-dom';
 
 
 class Dashboard extends Component {
@@ -43,10 +44,9 @@ class Dashboard extends Component {
     }
 
     render() {
-        var self = this,
-            options = ["apple", "mango", "grapes", "melon", "strawberry"].map(function (fruit) {
-                return {label: fruit, value: fruit}
-            });
+        if(this.state.token){
+            return <Redirect to='/'/>;
+        }
         return (
             <div className="container bg">
                 <div className="row bg align-items-center">
@@ -61,7 +61,15 @@ class Dashboard extends Component {
                                     <DropdownMenu>
                                         <DropdownItem header>Seleccione un materia</DropdownItem>
                                         {this.state.classes.map((item) => {
-                                            return <DropdownItem key={item._KEY}>{item.name}</DropdownItem>
+                                            return <Link key={item._KEY
+                                            } to={`/class/${item._KEY}`}>
+                                                < DropdownItem
+                                                >
+                                                    {
+                                                        item.name
+                                                    }
+                                                </DropdownItem></Link>
+
                                         })}
                                     </DropdownMenu>
                                 </Dropdown>
@@ -70,7 +78,7 @@ class Dashboard extends Component {
                     </div>
                     <div className="col-6">
                         <span className="text-apuntes">Comparte tus apuntes</span>
-                        <ImageUpload></ImageUpload>
+                        <ImageUpload classes={this.state.classes} ></ImageUpload>
                     </div>
                 </div>
             </div>

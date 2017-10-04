@@ -18,7 +18,8 @@
     "react-selectize": "^3.0.1",
     "react-transition-group": "^1.1.2",
     "reactstrap": "^4.8.0",
-    "sbx-querybuilder": "^1.0.7"
+    "sbx-querybuilder": "^1.0.7",
+    "alertify.js": "^1.0.12"
   },
   "scripts": {
     "start": "react-scripts start",
