@@ -25,7 +25,7 @@ class Dashboard extends Component {
         });
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.getClasses()
     }
 
@@ -44,7 +44,7 @@ class Dashboard extends Component {
     }
 
     render() {
-        if(this.state.token){
+        if(!this.state.token){
             return <Redirect to='/'/>;
         }
         return (

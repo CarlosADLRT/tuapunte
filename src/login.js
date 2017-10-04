@@ -1,7 +1,7 @@
 import React from 'react'
 import {Button, Card, CardBlock, CardText, CardTitle, Form, FormGroup, Input, Label} from 'reactstrap';
 import Axios from 'axios';
-import {BrowserRouter, Redirect, Link} from 'react-router-dom';
+import { Redirect, Link} from 'react-router-dom';
 import Alertify from 'alertify.js';
 
 export default class Login extends React.Component {
@@ -39,6 +39,7 @@ export default class Login extends React.Component {
                 Alertify.success("Inicio de sesión");
                 localStorage.setItem("token", res.data.token);
                 console.log(this.state);
+                this.props.history.push('/dashboard');
             }
         })
     }

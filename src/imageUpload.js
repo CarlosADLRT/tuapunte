@@ -36,7 +36,6 @@ export default class ImageUpload extends Component {
         };
         Axios.post('https://sbxcloud.com/api/content/v1/upload', input, option).then(res => {
             console.log(res);
-            const userKey = ''
             const query = new QueryBuilder()
                 .setDomain(197)
                 .setModel('apuente')
@@ -44,17 +43,17 @@ export default class ImageUpload extends Component {
                     class: this.state.class,
                     date: new Date(),
                     user: '7afec978-cc41-49b2-91ef-c44d06974a1e',
-                    img:this.state.file.name
+                    img: this.state.file.name
                 }).compile();
             let option = {
                 headers: {
                     'authorization': `Bearer ${this.state.token}`,
-                    "content-type" :"application/json"
+                    "content-type": "application/json"
 
                 }
             };
-            Axios.post('https://sbxcloud.com/api/data/v1/row',query,option).then(res=>{
-                if(res.data.success){
+            Axios.post('https://sbxcloud.com/api/data/v1/row', query, option).then(res => {
+                if (res.data.success) {
                     Alertify.success('Apunte enviado')
                 }
             })

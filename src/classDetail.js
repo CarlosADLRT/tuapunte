@@ -57,7 +57,7 @@ export default class ClassDetail extends Component {
         }
         return (
             <div>{this.state.apuntes.map(apunte => {
-                return <h1>{apunte.user.nombre}</h1>
+                return <h1 key={apunte._KEY}>{apunte.user.nombre}</h1>
             })}</div>
         )
     }

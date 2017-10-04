@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import Dashboard from './dashboard'
 import Register from './register';
-import { BrowserRouter, Route, Link,  } from 'react-router-dom'
+import {  Route  } from 'react-router-dom'
 import Login from './login';
 import classDetail from './classDetail';
 
