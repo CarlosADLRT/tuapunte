@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "alertify.js": "^1.0.12",
     "axios": "^0.16.2",
     "bootstrap": "^4.0.0-alpha.6",
     "gh-pages": "^1.0.0",
@@ -13,13 +14,13 @@
     "react-addons-transition-group": "^15.6.0",
     "react-dom": "^15.6.1",
     "react-dom-factories": "^1.0.0",
+    "react-images": "^0.5.9",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.13",
     "react-selectize": "^3.0.1",
     "react-transition-group": "^1.1.2",
     "reactstrap": "^4.8.0",
-    "sbx-querybuilder": "^1.0.7",
-    "alertify.js": "^1.0.12"
+    "sbx-querybuilder": "^1.0.7"
   },
   "scripts": {
     "start": "react-scripts start",

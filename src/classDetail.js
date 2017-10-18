@@ -1,16 +1,18 @@
 import React, {Component} from 'react';
 import Axios from 'axios';
 import QueryBuilder from 'sbx-querybuilder/index'
+import Report from './report'
 
 export default class ClassDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            class: 'prueba',
+            class: '',
             apuntes: [],
             classKey: props.match.params.key,
             token: localStorage.getItem('token'),
-            loading:true
+            loading: true,
+            lightboxIsOpen:false
         };
     }
 
@@ -30,7 +32,6 @@ export default class ClassDetail extends Component {
                 'App-Key': "d955b7df-2f91-467c-ad07-ebc5abb57646"
             }
         }).then(res => {
-            this.setState({loading:false});
             if (res.data.success) {
                 if (res.data.results.length > 0) {
                     const Class = res.data.fetched_results.class[this.state.classKey];
@@ -40,7 +41,7 @@ export default class ClassDetail extends Component {
                         apunte.user = users[apunte.user];
                     });
 
-                    this.setState({class: Class, apuntes, });
+                    this.setState({class: Class, apuntes,loading:false});
                 }
             }
 
@@ -49,15 +50,17 @@ export default class ClassDetail extends Component {
     }
 
     render() {
-        if(this.state.loading){
+        if (this.state.loading) {
             return <h1>Loading... {this.state.loading}</h1>
         }
-        if(this.state.apuntes.length===0){
+        if (this.state.apuntes.length === 0) {
             return <h1>No hay apuntes</h1>
         }
         return (
             <div>{this.state.apuntes.map(apunte => {
-                return <h1 key={apunte._KEY}>{apunte.user.nombre}</h1>
+                return (
+                    <Report key={apunte._KEY} report={apunte}/>
+                )
             })}</div>
         )
     }
