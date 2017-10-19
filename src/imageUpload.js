@@ -66,7 +66,6 @@ export default class ImageUpload extends Component {
         let reader = new FileReader();
         let file = e.target.files[0];
         const blob = file.slice(0, -1, 'image/png');
-        file = new File([blob], this.state.token + '.png', {type: 'image/png'});
         reader.onloadend = () => {
             this.setState({
                 file: file,
@@ -105,7 +104,7 @@ export default class ImageUpload extends Component {
                         <option value="">Selecione una materia</option>
                         {this.props.classes.map(clas => {
                             return (
-                                <option value={clas._KEY}>{clas.name}</option>
+                                <option key={clas._KEY} value={clas._KEY}>{clas.name}</option>
                             )
                         })}
                     </select>
@@ -117,9 +116,7 @@ export default class ImageUpload extends Component {
                             onClick={(e) => this._handleSubmit(e)}>Upload Image
                     </button>
                 </form>
-                <div className="imgPreview">
-                    {$imagePreview}
-                </div>
+
             </div>
         )
     }

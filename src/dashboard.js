@@ -48,7 +48,7 @@ class Dashboard extends Component {
             return <Redirect to='/'/>;
         }
         return (
-            <div className="container bg">
+            <div className="container-flush d-flex justify-content-center bg bg-dashboard">
                 <div className="row bg align-items-center">
                     <div className="col-6">
                         <div className="row">

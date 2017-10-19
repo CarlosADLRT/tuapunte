@@ -49,8 +49,8 @@ export default class Login extends React.Component {
             return <Redirect to='/dashboard'/>;
         }
         return (
-            <div className="container bg">
-                <div className="row bg align-items-center justify-content-center">
+            <div className="container-flush d-flex bg bg-login flex-column justify-content-center">
+                <div className="row align-items-center justify-content-center">
                     <div className="col-12">
                         <div className="row justify-content-center">
                             <div className="col-6">

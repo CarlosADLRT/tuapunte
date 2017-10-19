@@ -2,7 +2,6 @@
 
   /* Full height */
   height: 100%;
-  background-color: blue;
 
   /* Center and scale the image nicely */
   background-position: center;
@@ -12,17 +11,4 @@
 body, html {
   height: 100%;
   color:white;
-}
-.bg {
-
-  /* Full height */
-  height: 100%;
-
-
-  background-color: blue;
-
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
 }
