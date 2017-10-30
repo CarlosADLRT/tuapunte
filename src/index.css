@@ -1,3 +1,7 @@
+@font-face {
+  font-family: myFirstFont;
+  src: url('./KGMissKindergarten.ttf');
+}
 #root{
 
   /* Full height */
@@ -11,4 +15,13 @@
 body, html {
   height: 100%;
   color:white;
+  font-family: myFirstFont !important;
+}
+.card-apunte{
+  min-height: 300px;
+  width: 400px;
+}
+.relative{
+  position: absolute;
+  right: 0;
 }

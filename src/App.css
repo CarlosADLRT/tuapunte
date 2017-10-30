@@ -1,3 +1,4 @@
+
 .App {
     text-align: center;
 }
@@ -36,6 +37,7 @@
 
     /* Full height */
     height: 100%;
+    width: 100%;
     /* Center and scale the image nicely */
     background-position: center;
     background-repeat: no-repeat;
@@ -81,8 +83,15 @@ h3 {
     background: #efefef;
 
 }
+.card{
+    background-color: grey;
+    color:white;
+}
 .bg-dashboard{
     background-image: url('./Detail.jpeg');
+}
+.bg-classDetail{
+    background-color: #4C86E5;
 }
 .fill{
     height: 100%;
@@ -91,6 +100,14 @@ h3 {
     text-align: center;
     width: 500px;
 }
+.vote{
+    width: 80px;
+    background-color: #96d0e0;
+    border-radius: 20px;
+    padding: 8px;
+}
+
+
 
 
 
