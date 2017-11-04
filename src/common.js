@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import QueryBuilder from 'sbx-querybuilder';
-
+const domain = 197;
 export default class Common {
     static getHeader() {
         return {
@@ -8,18 +8,20 @@ export default class Common {
             'App-Key': "d955b7df-2f91-467c-ad07-ebc5abb57646"
         }
     }
-    static url(url){
-        switch (url){
+    static url(url) {
+        switch (url) {
             case 'find':
                 return 'https://archivo.digital/api/data/v1/row/find';
             case 'update':
                 return 'https://sbxcloud.com/api/data/v1/row/update';
+            default:
+                return '';
         }
     }
 
     static findClass(key, onSuccess, onError) {
         const query = new QueryBuilder()
-            .setDomain(197)
+            .setDomain(domain)
             .setModel('apuente')
             .addCondition('AND', 'class', '=', key)
             .fetchModels(['class', 'user']);
@@ -36,13 +38,13 @@ export default class Common {
         })
 
     }
-    static vote(apunte,onSuccess,onError){
+    static vote(apunte, onSuccess, onError) {
         const query = new QueryBuilder()
-            .setDomain(197)
+            .setDomain(domain)
             .setModel('apuente')
             .addObject({
-                _KEY:apunte._KEY,
-                votes:apunte.votes+1
+                _KEY: apunte._KEY,
+                votes: apunte.votes + 1
             });
         Axios({
             method: 'post',
@@ -80,6 +82,32 @@ export default class Common {
         //             .compile();
         //     }
         // })
+    }
+    static getProfile(id, onSuccess, onError) {
+        const query = new QueryBuilder()
+            .setDomain(domain)
+            .setModel('apuente')
+            .addCondition('AND', 'user.id', '=', id)
+            .fetchModels(['class', 'user']);
+        Axios({
+            method: 'post',
+            url: this.url('find'),
+            data: query.compile(),
+            headers: this.getHeader()
+        }).then(result => {
+
+            if (result.data.success) {
+                const data = result.data.results;
+                let user = result.data.fetched_results.user;
+                user = Object.values(user)[0];
+                const topic = result.data.fetched_results.class;
+                data.forEach(function (apunte) {
+                    apunte.class = topic[apunte.class];
+                }, this);
+                return onSuccess({ data, user })
+            }
+            onError('error')
+        })
     }
 
 

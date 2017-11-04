@@ -11,7 +11,6 @@ class Dashboard extends Component {
     constructor(props) {
         super(props);
         const token = localStorage.getItem("token");
-        console.log(token);
         this.state = {
             token, dropdownOpen: false, classes: []
         };
@@ -54,7 +53,7 @@ class Dashboard extends Component {
             return <Redirect to='/'/>;
         }
         return (
-            <div className="bg">
+            <div className="fill">
                 <div className=" bg-dashboard bg container-flush d-flex justify-content-center ">
                     <div className="row bg align-items-center">
                         <div className="col-6">

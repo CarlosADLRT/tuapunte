@@ -20,7 +20,6 @@ export default class ImageUpload extends Component {
     _handleSubmit(e) {
         e.preventDefault();
         // TODO: do something with -> this.state.file
-        console.log('handle uploading-', this.state.class);
         this.uploadImage(this.state.file, '055efde5-8880-41ac-9708-72e17b37c46c')
     }
 
@@ -35,7 +34,6 @@ export default class ImageUpload extends Component {
             }
         };
         Axios.post('https://sbxcloud.com/api/content/v1/upload', input, option).then(res => {
-            console.log(res);
             const query = new QueryBuilder()
                 .setDomain(197)
                 .setModel('apuente')
@@ -65,7 +63,6 @@ export default class ImageUpload extends Component {
 
         let reader = new FileReader();
         let file = e.target.files[0];
-        const blob = file.slice(0, -1, 'image/png');
         reader.onloadend = () => {
             this.setState({
                 file: file,
@@ -85,17 +82,9 @@ export default class ImageUpload extends Component {
         this.setState({
             [name]: value
         });
-        console.log(this.state)
     }
 
     render() {
-        let {imagePreviewUrl} = this.state;
-        let $imagePreview = null;
-        if (imagePreviewUrl) {
-            $imagePreview = (<img src={imagePreviewUrl}/>);
-        } else {
-            $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
-        }
 
         return (
             <div className="previewComponent">

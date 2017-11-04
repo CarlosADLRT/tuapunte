@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Ligthbox from 'react-images';
 import Moment from 'react-moment';
-import {Button, ButtonGroup} from 'reactstrap'
+import {Button} from 'reactstrap'
 import 'moment/locale/es';
 import Common from './common'
 
@@ -16,7 +16,6 @@ class Report extends Component {
     vote() {
         Common.vote(this.props.report,result=>{
             this.props.render();
-            console.log(result);
         },err=>{
             console.error(err);
         });
@@ -31,9 +30,9 @@ class Report extends Component {
             <div className="card mb-3">
                 <div className="card-body">
                     <div className="media">
-                        <img className="mr-3" width={100} style={{'objecFit': 'cover'}}
+                        <img className="mr-3" width={100} 
                              onClick={() => this.setState({lightboxIsOpen: true})} src={url + apunte.img}
-                             alt="Lesions image"/>
+                             alt="Apunte"/>
                         <div className="media-body flex-column">
                             <h3 className="ml-0">{apunte.user.nombre}</h3>
 
@@ -45,9 +44,9 @@ class Report extends Component {
                                       onClose={() => this.setState({lightboxIsOpen: false})}/>
                             <span> Votos: {apunte.votes}</span>
 
-                            <div className="rounded text-right">
+                            {this.props.show? <div className="rounded text-right">
                                 <Button onClick={this.vote} color="info">Votar</Button>
-                            </div>
+                            </div>:null}
                         </div>
                     </div>
 

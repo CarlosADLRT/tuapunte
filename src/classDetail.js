@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
-import Axios from 'axios';
-import QueryBuilder from 'sbx-querybuilder/index'
 import Report from './report'
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import Common from './common'
-
 import 'react-datepicker/dist/react-datepicker.css';
 
 export default class ClassDetail extends Component {
@@ -43,86 +40,30 @@ export default class ClassDetail extends Component {
                     apunte.date = new Date(apunte.date)
                 });
                 if (this.state.filter) {
-                    console.log(this.state.filter);
                     apuntes = apuntes.filter(apunte => {
                         const date = new Date(apunte.date);
                         date.setHours(0, 0, 0, 0)
-                        return date.getTime() == this.state.date.getTime()
+                        return date.getTime() === this.state.date.getTime()
                     })
                 }
 
                 apuntes = apuntes.sort((a, b) => {
                     return b.date - a.date;
                 });
-
-                console.log(apuntes);
-
                 this.setState({ class: Class, apuntes, loading: false });
             }
         },err=>{
             console.log(err)
         })
-        // const query = new QueryBuilder()
-        //     .setDomain(197)
-        //     .setModel('apuente')
-        //     .addCondition('AND', 'class', '=', this.state.classKey)
-        //     .fetchModels(['class', 'user']);
-        // Axios({
-        //     method: 'post',
-        //     url: 'https://archivo.digital/api/data/v1/row/find',
-        //     data: query.compile(),
-        //     headers: Common.getHeader()
-        // }).then(res => {
-        //     this.setState({ loading: false })
-        //     if (res.data.success) {
-        //         if (res.data.results.length > 0) {
-        //             const Class = res.data.fetched_results.class[this.state.classKey];
-        //             const users = res.data.fetched_results.user;
-        //             let apuntes = res.data.results;
-        //             apuntes.forEach(apunte => {
-        //                 apunte.user = users[apunte.user];
-        //                 apunte.date = new Date(apunte.date)
-        //             });
-        //             if (this.state.filter) {
-        //                 console.log(this.state.filter);
-        //                 apuntes = apuntes.filter(apunte => {
-        //                     const date = new Date(apunte.date);
-        //                     date.setHours(0, 0, 0, 0)
-        //                     return date.getTime() == this.state.date.getTime()
-        //                 })
-        //             }
-        //
-        //             apuntes = apuntes.sort((a, b) => {
-        //                 return b.date - a.date;
-        //             });
-        //
-        //             console.log(apuntes);
-        //
-        //             this.setState({ class: Class, apuntes, loading: false });
-        //         }
-        //
-        //     }
-        //
-        //
-        // });
     }
     handleChange(date) {
         const data = new Date(date).setHours(0, 0, 0, 0);
-        console.log(new Date(data));
         this.setState({
             startDate: date,
             date: new Date(data),
             filter: true
         });
         this.fetchData();
-    }
-
-    voteApunte(){
-        const query = new QueryBuilder()
-            .setDomain(197)
-            .setModel('apuente')
-            .addCondition('AND', 'class', '=', this.state.classKey)
-            .fetchModels(['class', 'user']);
     }
 
     render() {

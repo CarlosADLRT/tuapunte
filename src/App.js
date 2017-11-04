@@ -1,6 +1,6 @@
 import React from 'react';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default class App extends React.Component {
     constructor(props) {
@@ -10,10 +10,10 @@ export default class App extends React.Component {
         this.logout = this.logout.bind(this);
         this.state = {
             isOpen: false,
-            url:this.props.location
+            url: this.props.location
         };
     }
-    logout(){
+    logout() {
         localStorage.clear();
         // this.props.history.push('/');
     }
@@ -25,20 +25,20 @@ export default class App extends React.Component {
     }
     render() {
         return (
-              <Navbar color="faded" light expand="md">
+            <Navbar color="faded" light expand="md">
                 <NavbarBrand href="/">Tu apunte</NavbarBrand>
-                <NavbarToggler onClick={()=>{this.toggle()}} />
+                <NavbarToggler onClick={() => { this.toggle() }} />
                 <Collapse isOpen={this.state.isOpen} navbar>
-                  <Nav className="ml-auto" navbar>
-                    <NavItem>
-                      <NavLink disabled>{localStorage.getItem('name')}</NavLink>
-                    </NavItem>
-                      <NavItem>
-                          <NavLink onClick={this.logout}><Link to="/">Logout</Link></NavLink>
-                    </NavItem>
-                  </Nav>
+                    <Nav className="ml-auto" navbar>
+                        <NavItem>
+                            <NavLink> <Link to={`/profile/${localStorage.getItem('id')}`}>{localStorage.getItem('name')}</Link> </NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink onClick={this.logout}><Link to="/">Logout</Link></NavLink>
+                        </NavItem>
+                    </Nav>
                 </Collapse>
-              </Navbar>
+            </Navbar>
         );
     }
 }

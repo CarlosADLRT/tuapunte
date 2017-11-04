@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Card, CardBody, CardText, CardTitle, Form, FormGroup, Input, Label} from 'reactstrap';
+import {Button, Card, CardBody, CardTitle, Form, FormGroup, Input, Label} from 'reactstrap';
 import Axios from 'axios';
 import {Redirect} from 'react-router-dom';
 import Alertify from 'alertify.js';
@@ -26,7 +26,6 @@ export default class Login extends React.Component {
         this.setState({
             [name]: value
         });
-        console.log(this.state)
     }
 
     loginOnSbx() {
@@ -39,14 +38,12 @@ export default class Login extends React.Component {
                     "accept-encoding": "gzip"
                 }
             }).then(res => {
-            console.log(res)
             if (res.data.success) {
                 this.setState({logged: true});
                 Alertify.success("Inicio de sesión");
                 localStorage.setItem("token", res.data.token);
                 localStorage.setItem("name",this.state.username);
                 localStorage.setItem("id",res.data.user.id);
-                console.log(this.state);
                 this.props.history.push('/dashboard');
             }else{
                 Alertify.error('Contraseña invalida')

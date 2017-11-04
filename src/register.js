@@ -20,7 +20,6 @@ export default class Register extends Component {
         this.setState({
             [name]: value
         });
-        console.log(this.state)
     }
 
     registerOnSbx() {
@@ -32,7 +31,6 @@ export default class Register extends Component {
                     "app-key": appKey
                 }
             }).then(res => {
-            console.log(res);
             const user = res.data.user;
             const query = new QueryBuilder()
                 .setDomain(197)
