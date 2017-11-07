@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Report from './report'
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
@@ -29,7 +29,7 @@ export default class ClassDetail extends Component {
 
     }
     fetchData() {
-        Common.findClass(this.state.classKey,res=>{
+        Common.findClass(this.state.classKey, res => {
             this.setState({ loading: false });
             if (res.data.results.length > 0) {
                 const Class = res.data.fetched_results.class[this.state.classKey];
@@ -52,7 +52,7 @@ export default class ClassDetail extends Component {
                 });
                 this.setState({ class: Class, apuntes, loading: false });
             }
-        },err=>{
+        }, err => {
             console.log(err)
         })
     }
@@ -77,7 +77,7 @@ export default class ClassDetail extends Component {
             display =
                 this.state.apuntes.map(apunte => {
                     return (
-                        <Report render={this.fetchData} key={apunte._KEY} report={apunte} />
+                        <Report show={true} render={this.fetchData} key={apunte._KEY} report={apunte} />
                     )
                 })
         }
@@ -87,12 +87,16 @@ export default class ClassDetail extends Component {
                 <div className="container pt-3 ">
                     <h1 className="text-white">{this.state.class.name}</h1>
                     <div className="row mb-5">
-                        <div className="col-12">
+                        <div className="col-6">
                             <span className="text-white">Seleccione una fecha</span>
                             <DatePicker
                                 selected={this.state.startDate}
                                 onChange={this.handleChange}
                             />
+                        </div>
+                        <div className="col-6 text-right">
+                            <span className="text-white">Vota por el mejor apunte!</span>
+
                         </div>
                     </div>
                     <div className="row">

@@ -26,7 +26,7 @@ export default class App extends React.Component {
     render() {
         return (
             <Navbar color="faded" light expand="md">
-                <NavbarBrand href="/">Tu apunte</NavbarBrand>
+                <NavbarBrand><Link to="/">Tu apunte</Link></NavbarBrand>
                 <NavbarToggler onClick={() => { this.toggle() }} />
                 <Collapse isOpen={this.state.isOpen} navbar>
                     <Nav className="ml-auto" navbar>

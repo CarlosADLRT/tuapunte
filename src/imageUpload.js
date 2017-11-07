@@ -41,7 +41,8 @@ export default class ImageUpload extends Component {
                     class: this.state.class,
                     date: new Date(),
                     user: '7afec978-cc41-49b2-91ef-c44d06974a1e',
-                    img: this.state.file.name
+                    img: this.state.file.name,
+                    votes:0
                 }).compile();
             let option = {
                 headers: {

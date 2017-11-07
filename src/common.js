@@ -14,6 +14,8 @@ export default class Common {
                 return 'https://archivo.digital/api/data/v1/row/find';
             case 'update':
                 return 'https://sbxcloud.com/api/data/v1/row/update';
+            case 'delete': 
+                return 'https://sbxcloud.com/api/data/v1/row/delete';
             default:
                 return '';
         }
@@ -83,6 +85,30 @@ export default class Common {
         //     }
         // })
     }
+    static sort(apuntes) {
+
+        apuntes = apuntes.sort((a, b) => {
+            return b.votes - a.votes;
+        });
+    }
+    static deleteApunte(key, onSuccess, onError) {
+        const query = new QueryBuilder()
+            .setDomain(domain)
+            .setModel('apuente')
+            .whereWithKeys([key]);
+        Axios({
+            method: 'post',
+            url: this.url('delete'),
+            data: query.compile(),
+            headers: this.getHeader()
+        }).then(result => {
+
+            if (result.data.success) {
+                onSuccess('Apunte eliminado')
+            }
+            onError('error')
+        });
+    }
     static getProfile(id, onSuccess, onError) {
         const query = new QueryBuilder()
             .setDomain(domain)
@@ -104,10 +130,11 @@ export default class Common {
                 data.forEach(function (apunte) {
                     apunte.class = topic[apunte.class];
                 }, this);
+                this.sort(data)
                 return onSuccess({ data, user })
             }
             onError('error')
-        })
+        });
     }
 
 
